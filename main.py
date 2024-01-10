@@ -95,5 +95,5 @@ def predict():
 
         return render_template(output_page, pred_output=pred_class, pred_prob=pred_prob, user_image=file_path)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
