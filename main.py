@@ -17,11 +17,11 @@ MODEL_ARCHITECTURE = 'model/test.json'
 MODEL_WEIGHTS = 'model/test-test-92.57.h5'
 
 PREDICTION_CLASSES = {
-    0: ('Tanaman Padimu Terkena', 'Klasifikasi/klasifikasi-blb.html'),
-    1: ('Tanaman Padimu Terkena', 'Klasifikasi/klasifikasi-bw.html'),
-    2: ('Gambar Tidak Ada', 'Klasifikasi/klasifikasi-noklasifikasi.html'),
-    3: ('Tanaman', 'Klasifikasi/klasifikasi-sh.html'),
-    4: ('Tanaman Padimu Terkena', 'Klasifikasi/klasifikasi-bl.html'),
+    0: ('Tanaman Padimu Terkena', 'klasifikasi-blb.html'),
+    1: ('Tanaman Padimu Terkena', 'klasifikasi-bw.html'),
+    2: ('Gambar Tidak Ada', 'klasifikasi-noklasifikasi.html'),
+    3: ('Tanaman', 'klasifikasi-sh.html'),
+    4: ('Tanaman Padimu Terkena', 'klasifikasi-bl.html'),
 }
 
 # Fungsi untuk memuat model dari file
