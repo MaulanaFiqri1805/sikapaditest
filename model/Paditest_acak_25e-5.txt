@@ -1,1 +1,0 @@
-{0: 'bacterial_leaf_blight', 1: 'brown_spot', 2: 'cobax', 3: 'healthy', 4: 'leaf_blast'}

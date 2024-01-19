@@ -1,5 +1,5 @@
+from flask import Flask, jsonify,request, render_template
 import os
-from flask import Flask, request, render_template, send_from_directory
 from sklearn import model_selection
 from werkzeug.utils import secure_filename
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
@@ -9,19 +9,18 @@ import numpy as np
 from PIL import Image
 import logging
 
-# Inisialisasi Flask
 app = Flask(__name__)
 
-# Konfigurasi model dan definisi kelas prediksi
-MODEL_ARCHITECTURE = 'model/test.json'
-MODEL_WEIGHTS = 'model/test-test-92.57.h5'
+
+MODEL_ARCHITECTURE = 'model/clean721.json'
+MODEL_WEIGHTS = 'model/clean721.h5'
 
 PREDICTION_CLASSES = {
-    0: ('Tanaman Padimu Terkena', 'klasifikasi-blb.html'),
-    1: ('Tanaman Padimu Terkena', 'klasifikasi-bw.html'),
-    2: ('Gambar Tidak Ada', 'klasifikasi-noklasifikasi.html'),
-    3: ('Tanaman', 'klasifikasi-sh.html'),
-    4: ('Tanaman Padimu Terkena', 'klasifikasi-bl.html'),
+    0: ('Gambar Tidak Cocok', 'klasifikasi-noklasifikasi.html'),
+    1: ('Tanaman Padimu Terkena', 'klasifikasi-bl.html'),
+    2: ('Tanaman Padimu Terkena', 'klasifikasi-blb.html'),
+    3: ('Tanaman Padimu Terkena', 'klasifikasi-bw.html'),
+    4: ('Tanaman', 'klasifikasi-sh.html'),
 }
 
 # Fungsi untuk memuat model dari file
@@ -95,5 +94,6 @@ def predict():
 
         return render_template(output_page, pred_output=pred_class, pred_prob=pred_prob, user_image=file_path)
 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=os.getenv("PORT", default=5000))
+    app.run(debug=True)

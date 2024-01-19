@@ -1,4 +1,3 @@
-// image-upload.js
 document.addEventListener("DOMContentLoaded", function () {
     const dragDropArea = document.getElementById("drag-drop-area");
     const imageUpload = document.getElementById("image-upload");
@@ -15,6 +14,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function resizeImage(file, callback) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                canvas.width = 224;
+                canvas.height = 224;
+
+                ctx.drawImage(img, 0, 0, 224, 224);
+
+                canvas.toBlob((blob) => {
+                    callback(blob);
+                }, "image/jpeg", 0.8);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
     dragDropArea.addEventListener("dragover", (e) => {
         e.preventDefault();
         dragDropArea.style.backgroundColor = "#ddd";
@@ -28,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         dragDropArea.style.backgroundColor = "#f1f1f1";
         const file = e.dataTransfer.files[0];
-        displayImage(file);
+        resizeImage(file, (resizedBlob) => {
+            displayImage(resizedBlob);
+        });
     });
 
     dragDropArea.addEventListener("click", () => {
@@ -37,22 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     imageUpload.addEventListener("change", () => {
         const file = imageUpload.files[0];
-        displayImage(file);
+        resizeImage(file, (resizedBlob) => {
+            displayImage(resizedBlob);
+        });
     });
 
     document.getElementById("image-upload").addEventListener("change", function () {
         var input = this;
-        var img = document.getElementById("uploaded-image");
 
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                img.src = e.target.result;
-                img.style.display = "block";
-            };
-
-            reader.readAsDataURL(input.files[0]);
+            resizeImage(input.files[0], (resizedBlob) => {
+                displayImage(resizedBlob);
+            });
         }
     });
 });
