@@ -8,6 +8,6 @@ Werkzeug==1.0.1
 gevent==23.9.1
 grpcio==1.59.0
 h5py==3.10.0
-Pillow==10.0.1
-scikit-learn==1.3.1
-tensorflow==2.12.0
+Pillow==8.0.1  # Versi Pillow yang kompatibel dengan Python 3.9
+scikit-learn==0.24.2  # Versi terakhir yang mendukung Python 3.9
+tensorflow==2.3.4  # Versi terakhir yang mendukung Python 3.9
